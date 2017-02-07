@@ -37,5 +37,5 @@ value <= monadicType
 ```
  
 Since this is converted to: `monadicType.flatMap(function(value) return ...)`,
-the monadic type in question, must have a flatMap implementation. This may be provieded through using
+the monadic type in question, must have a flatMap implementation. This may be provided through using
 or as a field on the type itself. Else, you will recieve a "Has no field 'flatMap'" error.
