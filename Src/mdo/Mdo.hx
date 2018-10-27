@@ -57,8 +57,15 @@ class Mdo {
                                      macro { $a; $b; };
                                  case macro var $name:$type = $val:
                                      macro { $a; $b; };
-                                 case macro $inv <= $_:
-                                     C.error("Invalid binding, must be identifier", inv.pos); 
+
+				 // Requires monad-fail even if total pattern
+				 //    don't want to do any typefu related things here
+                                 case macro $pat <= $val:
+				     var vtmp = '__GENSYM__mdo__${Std.random(0xffffff)}';
+				     var tmp = '__GENSYM__mdo__${Std.random(0xffffff)}';
+				     macro @:pos(val.pos)
+					 { var $vtmp = $val;
+					   $i{vtmp}.flatMap(function($tmp) return switch($i{tmp}) { case $pat: $b; default: $i{vtmp}.fail(); }); }
                                  case _:
                                      macro @:pos(a.pos) $a.flatMap(function(_) return $b);
                                  }
@@ -66,4 +73,5 @@ class Mdo {
         
         return code;
     }
+
 }
