@@ -10,11 +10,11 @@ import TestAll.assertEquals;
 class TestAll {
     static function main() {
 	var rt = new RunTests();
-	var methods = Type.getInstanceFields(RunTests)
-	    .filter(f -> StringTools.startsWith(f, "test"))
+	Type.getInstanceFields(RunTests)
+	    .filter(StringTools.startsWith.bind(_, "test"))
 	    .map(Reflect.field.bind(rt))
 	    .filter(Reflect.isFunction)
-	    .map(fn -> try fn() catch(e:Any) { failed = true; haxe.Log.trace('[EXN]'); });
+	    .map(function(fn) try fn() catch(e:Any) { failed = true; haxe.Log.trace('[EXN]'); });
 
 	haxe.Log.trace(failed ? 'one or more tests failed' : 'all tests ok');
 	Sys.exit(failed ? 1 : 0);
