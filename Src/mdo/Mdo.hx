@@ -61,8 +61,8 @@ class Mdo {
 				 // Requires monad-fail even if total pattern
 				 //    don't want to do any typefu related things here
                                  case macro $pat <= $val:
-				     var vtmp = '__GENSYM__mdo__${Std.random(0xffffff)}';
-				     var tmp = '__GENSYM__mdo__${Std.random(0xffffff)}';
+				     var vtmp = '__GENSYM__mdo__${GSYMID++}';
+				     var tmp = '__GENSYM__mdo__${GSYMID++}';
 				     macro @:pos(val.pos)
 					 { var $vtmp = $val;
 					   $i{vtmp}.flatMap(function($tmp) return switch($i{tmp}) { case $pat: $b; default: $i{vtmp}.fail(); }); }
@@ -73,5 +73,7 @@ class Mdo {
         
         return code;
     }
+
+    static var GSYMID = 0;
 
 }
