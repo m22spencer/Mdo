@@ -2,7 +2,7 @@
     "name": "mdo",
     "url" : "https://github.com/m22spencer/Mdo",
     "license": "MIT",
-    "tags": ["cross", "utility", "functional", "sugar"]
+    "tags": ["cross", "utility", "functional", "sugar"],
     "description": "Simple monad do-notation implementation",
     "version": "0.0.1",
     "classPath": "Src",
